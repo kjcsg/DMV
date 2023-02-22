@@ -1,29 +1,74 @@
-import java.io.File;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Assignment6 {
-    //Code coming from Daneyra, everything I put is just for testing purposes
-    public static void main(String[] args) throws Exception{
-        File input = new File("list.txt"); //Read the file
-        Scanner scan = new Scanner(input).useDelimiter(",|\r\n"); //Set commas, carriage returns, and new lines as scanner pause points
+  AppointmentQueue appointQue;
+  Assignment6() {
+    appointQue = new AppointmentQueue();
+  }
 
-        String name, reason;
-        int time;
+  //Method that is desginated for reading the DMV_Appointments.txt file//
+  void readFile() {
+    String name;
+    String reason;
+    int time;
 
-        while(scan.hasNextLine()){ //While we haven't reached the end of the file
-            name = scan.next(); //Read the name, stops at comma
-            reason = scan.next(); //Read the reason, stops at comma
-            time = scan.nextInt(); //Read the time, stops at line break
-            Appointment appt =  new Appointment(name, reason, time); //Make new appointment object with read info
-            AppointmentQueue.push(appt); //Add new appointment to queue
-        }
-        Appointment peek = AppointmentQueue.peek(); //View next appointment without removing from queue
-        int i = 0;
-        while(i<10){
-            Appointment next = AppointmentQueue.pop(); //Get next appointment (WILL remove from queue as this is a pop function)
-            System.out.println("Up next is: " + next.name + ", " + next.reason + ", " + next.time); //Just for testing purposes
-        }
-        AppointmentQueue.show(); //Just for testing purposes
+    try {
+
+      File myFile = new File("DMV_Appointments.txt");
+      Scanner scnr = new Scanner(myFile);
+
+      while(scnr.hasNext()) {
+        name = scnr.next();
+        reason = scnr.next();
+        time = scnr.nextInt();
+
+  //This is going to push in the contents of the Appointment class into our Appointment Queue class//
+        AppointmentQueue.push(new Appointment(name, reason, time));
+      }
+
+      scnr.close();
+    }
+    catch(FileNotFoundException e) {
+      System.out.println("No file found.");
+      e.printStackTrace();
+      
     }
 
+  }
+
+  public static void main(String[] args) {
+    Scanner read = new Scanner(System.in);
+    Assignment6 appoint = new Assignment6();
+    appoint.readFile();
+    String name;
+    int i;
+    int value;
+
+      do {
+        value = 0;
+
+  //Will prompt the user to enter their name in order to check 
+        System.out.println("\nPlease enter your name: ");
+        name = read.next();
+
+//Need to have the rear end method to indicate the end of the queue//
+        //        would go here after appoint.appointQue.  // 
+        for (i = 0; i < appoint.appointQue.; i++) {
+          if (name.compareTo(appoint.appointQue.peek(i).name) == 0) {
+            value = 1;
+            break;
+          }
+        }
+    //The name entered is up in the Queue//
+        if (value == 1)
+          System.out.println(appoint.appointQue.pop() + "You're now up, the DMV will assist you now.");
+    //The name entered is not next in the Queue//
+        else
+          System.out.println("\nIt is not your turn, please wait until it is.");
+    //Will let the user know that the Queue is currently empty//
+      }
+        while(true);
+  }
 }
