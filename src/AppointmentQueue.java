@@ -19,12 +19,18 @@ public class AppointmentQueue {
 
     public static Appointment pop(){
         int qLength = queue.length; //Get the current length of the queue
-        Appointment info = queue[0]; //Grab the info fromt the top of the queue
-        Appointment[] oldQueue = queue; //Copy current queue 
-        Appointment[] newQueue = new Appointment[qLength-1]; //Temp array to hold new queue until it's copied to main queue 2 lines down, arraycopy won't work without this
-        System.arraycopy(oldQueue, 1, newQueue, 0, qLength-1); //Recreate queue array with one less slot & remove the top of the queue
-        queue = newQueue; //Set main queue to new, shorter queue
-        return info; //Send the info for who's next back to what called this function
+        if(qLength>0){
+            Appointment info = queue[0]; //Grab the info fromt the top of the queue
+            Appointment[] oldQueue = queue; //Copy current queue 
+            Appointment[] newQueue = new Appointment[qLength-1]; //Temp array to hold new queue until it's copied to main queue 2 lines down, arraycopy won't work without this
+            System.arraycopy(oldQueue, 1, newQueue, 0, qLength-1); //Recreate queue array with one less slot & remove the top of the queue
+            queue = newQueue; //Set main queue to new, shorter queue
+            return info; //Send the info for who's next back to what called this function
+        }
+        else{
+            System.out.println("The queue is empty.");
+            return null;
+        }
     }
 
     public static Appointment peek(){
@@ -33,11 +39,17 @@ public class AppointmentQueue {
 
     public static void show(){ //This is just for troubleshooting purposes, will remove before turning in. Prints out the current queue
         int i = 0; 
-        System.out.println("Current Queue:");
-        while(i<queue.length){
-            System.out.println(i+1 + " " + queue[i].name + ", " + queue[i].reason + ", " + queue[i].time);
-            i++;
+        int qL = queue.length;
+
+        if(queue[i]==null){System.out.println("The queue is empty.");}
+        else{
+            System.out.println("Current Queue:");
+            while(i<queue.length){
+                System.out.println(i+1 + " " + queue[i].name + ", " + queue[i].reason + ", " + queue[i].time);
+                i++;
+            }
         }
+
         
     }
 }

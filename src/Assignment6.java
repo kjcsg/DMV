@@ -18,8 +18,11 @@ public class Assignment6 {
             AppointmentQueue.push(appt); //Add new appointment to queue
         }
         Appointment peek = AppointmentQueue.peek(); //View next appointment without removing from queue
-        Appointment next = AppointmentQueue.pop(); //Get next appointment (WILL remove from queue as this is a pop function)
-        System.out.println("Up next is: " + next.name + ", " + next.reason + ", " + next.time); //Just for testing purposes
+        int i = 0;
+        while(i<10){
+            Appointment next = AppointmentQueue.pop(); //Get next appointment (WILL remove from queue as this is a pop function)
+            System.out.println("Up next is: " + next.name + ", " + next.reason + ", " + next.time); //Just for testing purposes
+        }
         AppointmentQueue.show(); //Just for testing purposes
     }
 
