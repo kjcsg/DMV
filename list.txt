@@ -1,0 +1,10 @@
+Jameson,ID,600
+Johnson,ID,700
+Stevenson,Registration,730
+Anderson,DL,630
+Jones,ID,645
+Franklin,Registration,745
+Roosevelt,DL,615
+Nicholson,Registration,800
+Blackwell,DL,715
+Reynolds,DL,815
