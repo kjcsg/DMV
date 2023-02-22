@@ -1,12 +1,4 @@
-import java.util.Arrays;
-
 public class AppointmentQueue {
-    /* Game plan:
-     * 1) Init the queue, a 5 slot array and accepts an array object as input from Appointment.java
-     * 2) Method to be called upon for queue.push
-     * 3) Method to be called upon for queue.pop
-     * 4) Method to be called upon for queue.peek
-     */
     private static Appointment[] queue = new Appointment[5];
 
     public static void push(Appointment appt){

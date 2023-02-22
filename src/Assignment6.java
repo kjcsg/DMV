@@ -2,9 +2,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Assignment6 {
-    /*Code coming from Daneyra
-    Reads text file, sorts by times, calls appointmentqueue to make queue of appointments, then asks for a name from the user
-    and calls the appointment class to find out if the name input is the next up name*/
+    //Code coming from Daneyra, everything I put is just for testing purposes
     public static void main(String[] args) throws Exception{
         File input = new File("list.txt"); //Read the file
         Scanner scan = new Scanner(input).useDelimiter(",|\r\n"); //Set commas, carriage returns, and new lines as scanner pause points
