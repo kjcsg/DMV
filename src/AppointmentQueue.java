@@ -47,7 +47,7 @@ public class AppointmentQueue {
         return queue.length;
     }
 
-    public static boolean has(String name){
+    public static boolean has(String name){ //Retruns true if the name is in the queue
         boolean inqueue = false;
         for (int i=0; i<queue.length; i++){
             if(Objects.equals(queue[i].name.toLowerCase(), name.toLowerCase())){
