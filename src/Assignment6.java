@@ -43,7 +43,7 @@ public class Assignment6 {
     int qLength = AppointmentQueue.length(); 
     int i;
 
-    while(qLength>0){
+    do{
   //Will prompt the user to enter their name in order to check 
         System.out.print("\nPlease enter your name: ");
         name = read.next().toLowerCase(); //Added toLowerCase to prevent errors from someone typing in all lowercase {Kyle}
@@ -69,7 +69,7 @@ public class Assignment6 {
             }
         }
         else{System.out.println("Sorry, "+name+" isn't in the queue.");}   
-    }
+    }while(qLength>0);
     System.out.println("\nThe queue is empty. Goodbye.");
     read.close();
     System.exit(0);
