@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class AppointmentQueue {
     private static Appointment[] queue = new Appointment[5];
 
@@ -35,6 +37,25 @@ public class AppointmentQueue {
 
     public static Appointment peek(){
         return queue[0]; //Send the appointment object at the top of the queue back
+    }
+
+    public static Appointment peek(int i){
+        return queue[i]; //Send the appointment object at the index i of the queue back
+    }
+
+    public static int length(){ //Returns base 1 length
+        return queue.length;
+    }
+
+    public static boolean has(String name){
+        boolean inqueue = false;
+        for (int i=0; i<queue.length; i++){
+            if(Objects.equals(queue[i].name.toLowerCase(), name.toLowerCase())){
+                inqueue = true;
+                break;
+            }
+        }
+        return inqueue;
     }
 
     public static void show(){ //This is just for troubleshooting purposes, will remove before turning in. Prints out the current queue

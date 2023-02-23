@@ -1,74 +1,77 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 public class Assignment6 {
-  AppointmentQueue appointQue;
+  /*AppointmentQueue appointQue;
   Assignment6() {
     appointQue = new AppointmentQueue();
-  }
+  }*/ //Not needed as the AppointmentQueue class stores the queue {Kyle}
 
   //Method that is desginated for reading the DMV_Appointments.txt file//
-  void readFile() {
+  private static void readFile() { //Made private static to work with main method line 44 {Kyle}
     String name;
     String reason;
-    int time;
+    int time; //Changed to int to work with appointment class {Kyle}
 
     try {
 
       File myFile = new File("DMV_Appointments.txt");
-      Scanner scnr = new Scanner(myFile);
+      Scanner scnr = new Scanner(myFile).useDelimiter(",|\r\n"); //Added delimiter to separate each part of the file {Kyle}
 
       while(scnr.hasNext()) {
         name = scnr.next();
         reason = scnr.next();
-        time = scnr.nextInt();
-
-  //This is going to push in the contents of the Appointment class into our Appointment Queue class//
+        time = scnr.nextInt(); //Changed to int to work with appointment class {Kyle}
+        //This is going to push in the contents of the Appointment class into our Appointment Queue class
         AppointmentQueue.push(new Appointment(name, reason, time));
       }
-
       scnr.close();
     }
     catch(FileNotFoundException e) {
       System.out.println("No file found.");
       e.printStackTrace();
-      
     }
-
   }
 
   public static void main(String[] args) {
     Scanner read = new Scanner(System.in);
-    Assignment6 appoint = new Assignment6();
-    appoint.readFile();
+    //Assignment6 appoint = new Assignment6(); --Changing to appointment object on {Kyle}
+    readFile(); //Directly calling readFile function {Kyle}
+    AppointmentQueue.show();
     String name;
+    int qLength = AppointmentQueue.length(); 
     int i;
-    int value;
 
-      do {
-        value = 0;
-
+    while(qLength>0){
   //Will prompt the user to enter their name in order to check 
-        System.out.println("\nPlease enter your name: ");
-        name = read.next();
+        System.out.print("\nPlease enter your name: ");
+        name = read.next().toLowerCase(); //Added tolowercase to prevent errors from someone typing in all lowercase {Kyle}
 
-//Need to have the rear end method to indicate the end of the queue//
-        //        would go here after appoint.appointQue.  // 
-        for (i = 0; i < appoint.appointQue.; i++) {
-          if (name.compareTo(appoint.appointQue.peek(i).name) == 0) {
-            value = 1;
-            break;
-          }
+//Need to have the rear end method to indicate the end of the queue// I added a length function so we can get the end of the queue and exit {Kyle}
+        //        would go here after appoint.appointQue.
+        if(AppointmentQueue.has(name)){
+            if(Objects.equals(AppointmentQueue.peek().name.toLowerCase(), name)){ //Added tolowercase to prevent errors from someone typing in all lowercase {Kyle}
+                Appointment appoint = AppointmentQueue.pop();
+                System.out.println("You're now up, " + appoint.name + ", the DMV will assist you now.");
+                qLength = AppointmentQueue.length();
+            }
+            else{
+                i=0;
+                while (i < qLength) {
+                    if (Objects.equals(AppointmentQueue.peek(i).name.toLowerCase(), name)) { //Added tolowercase to prevent errors from someone typing in all lowercase {Kyle}
+                        int j = i+1;
+                        System.out.println("Sorry "+ name +", you are in position "+j+".");
+                        break;
+                    }
+                    else{i++;}
+                }
+            }
         }
-    //The name entered is up in the Queue//
-        if (value == 1)
-          System.out.println(appoint.appointQue.pop() + "You're now up, the DMV will assist you now.");
-    //The name entered is not next in the Queue//
-        else
-          System.out.println("\nIt is not your turn, please wait until it is.");
-    //Will let the user know that the Queue is currently empty//
-      }
-        while(true);
+        else{System.out.println("Sorry, "+name+" isn't in the queue.");}
+        
+    }
+      System.exit(0);
   }
 }
