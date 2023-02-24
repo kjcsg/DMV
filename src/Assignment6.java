@@ -4,26 +4,21 @@ import java.io.FileNotFoundException;
 import java.util.Objects;
 
 public class Assignment6 {
-  /*AppointmentQueue appointQue;
-  Assignment6() {
-    appointQue = new AppointmentQueue();
-  }*/ //Not needed as the AppointmentQueue class stores the queue {Kyle}
-
   //Method that is desginated for reading the DMV_Appointments.txt file//
-  private static void readFile() { //Made private static to work with main method line 44 {Kyle}
+  private static void readFile() {
     String name;
     String reason;
-    int time; //Changed to int to work with appointment class {Kyle}
+    int time;
 
     try {
 
       File myFile = new File("DMV_Appointments.txt");
-      Scanner scnr = new Scanner(myFile).useDelimiter(",|\r\n"); //Added delimiter to separate each part of the file {Kyle}
+      Scanner scnr = new Scanner(myFile).useDelimiter(",|\r\n");
 
       while(scnr.hasNext()) {
         name = scnr.next();
         reason = scnr.next();
-        time = scnr.nextInt(); //Changed to int to work with appointment class {Kyle}
+        time = scnr.nextInt();
         //This is going to push in the contents of the Appointment class into our Appointment Queue class
         AppointmentQueue.push(new Appointment(name, reason, time));
       }
@@ -37,8 +32,7 @@ public class Assignment6 {
 
   public static void main(String[] args) {
     Scanner read = new Scanner(System.in);
-    //Assignment6 appoint = new Assignment6(); --Changing to appointment object on {Kyle}
-    readFile(); //Directly calling readFile function {Kyle}
+    readFile();
     String name;
     int qLength = AppointmentQueue.length(); 
     int i;
@@ -46,12 +40,9 @@ public class Assignment6 {
     do{
   //Will prompt the user to enter their name in order to check 
         System.out.print("\nPlease enter your name: ");
-        name = read.next().toLowerCase(); //Added toLowerCase to prevent errors from someone typing in all lowercase {Kyle}
-
-//Need to have the rear end method to indicate the end of the queue// I added a length function so we can get the end of the queue and exit {Kyle}
-        //        would go here after appoint.appointQue.
-        if(AppointmentQueue.has(name)){ //Added a function in AppointmentQueue to check if the name is in the queue {Kyle}
-            if(Objects.equals(AppointmentQueue.peek().name.toLowerCase(), name)){ //Added toLowerCase to prevent errors from someone typing in all lowercase {Kyle}
+        name = read.next().toLowerCase();
+        if(AppointmentQueue.has(name)){
+            if(Objects.equals(AppointmentQueue.peek().name.toLowerCase(), name)){
                 Appointment appoint = AppointmentQueue.pop();
                 System.out.println(appoint.name+", You're now up, the DMV will assist you now.");
                 qLength = AppointmentQueue.length();
@@ -59,7 +50,7 @@ public class Assignment6 {
             else{
                 i=0;
                 while (i < qLength) {
-                    if (Objects.equals(AppointmentQueue.peek(i).name.toLowerCase(), name)) { //Added toLowerCase to prevent errors from someone typing in all lowercase {Kyle}
+                    if (Objects.equals(AppointmentQueue.peek(i).name.toLowerCase(), name)) {
                         int j = i+1;
                         System.out.println("Sorry "+ name +", you are in position "+j+".");
                         break;
